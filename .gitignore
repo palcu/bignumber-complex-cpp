@@ -20,4 +20,4 @@
 *.out
 *.app
 
-main.out
+main.out*

@@ -34,12 +34,9 @@ using std::reverse;
 
 class BigNumber {
   public:
-    BigNumber(int integerPart, int fractionaryPart) {
-        BigNumber(to_string(integerPart) + "." + to_string(fractionaryPart));
-    }
-    explicit BigNumber(int x) {
-        BigNumber(to_string(x));
-    }
+    explicit BigNumber(int x) : BigNumber(to_string(x)) { }
+    BigNumber(int integerPart, int fractionaryPart) :
+        BigNumber(to_string(integerPart) + "." + to_string(fractionaryPart)) { }
     explicit BigNumber(string v) {
         int i = 0;
         if (v[i] == '-') {
@@ -92,12 +89,14 @@ class BigNumber {
 };
 
 int main() {
-    std::vector<string> v = {"10", "10.3", "-10.555", "69.34433434", "0"};
+    assert(BigNumber(6, 9).toString() == "6.9");
+    assert(BigNumber(3).toString() == "3");
+    assert(BigNumber(-5).toString() == "-5");
 
-    for (int i = 0; i < v.size(); i++) {
-        BigNumber a = BigNumber(v[i]);
-        assert(a.toString() == v[i]);
-    }
+    std::vector<string> v = {"10", "10.3", "-10.555", "69.34433434", "0", "2"};
+
+    for (int i = 0; i < v.size(); i++)
+        assert(BigNumber(v[i]).toString() == v[i]);
 
     return 0;
 }
