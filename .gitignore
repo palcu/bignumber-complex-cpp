@@ -19,7 +19,3 @@
 *.exe
 *.out
 *.app
-
-# Build
-build
-gtest

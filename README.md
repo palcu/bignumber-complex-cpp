@@ -22,27 +22,6 @@ Precizari:
         decat necesar).
 ```
 
-# How to run
-
-In `gtest` download the Google Test framework. Then:
-
-```
-cd gtest
-mkdir build
-cd build
-cmake ..
-make
-```
-
-Then go to the root directory and do the same.
-
-```
-mkdir build
-cmake ..
-make
-./sample1
-```
-
 # Milestone 1
 
 ![diagram](https://app.genmymodel.com/files/_ZJiAoJ-dEDGn1-aaBa6y3w/oop-diag.jpg)
