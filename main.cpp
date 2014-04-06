@@ -24,42 +24,80 @@ THE SOFTWARE.
 
 #include <string>
 #include <cassert>
+#include <algorithm>
+#include <vector>
+#include <stdexcept>
 
 using std::string;
 using std::to_string;
+using std::reverse;
 
 class BigNumber {
   public:
     BigNumber(int integerPart, int fractionaryPart) {
-        this->integerPart = abs(integerPart);
-        this->fractionaryPart = fractionaryPart;
-        if (integerPart < 0)
-            sign = 1;
-        else
-            sign = 0;
+        BigNumber(to_string(integerPart) + "." + to_string(fractionaryPart));
     }
     explicit BigNumber(int x) {
-        BigNumber(x, 0);
+        BigNumber(to_string(x));
+    }
+    explicit BigNumber(string v) {
+        int i = 0;
+        if (v[i] == '-') {
+            sign = 1;
+            i++;
+        }
+        while (i < v.size()) {
+            if (isdigit(v[i])) {
+                integerPart.push_back(v[i]);
+            } else {
+                if (v[i] != '.')
+                    throw std::runtime_error("NaN");
+                break;
+            }
+            i++;
+        }
+        if (v[i] == '.') {
+            i++;
+            while (i < v.size()) {
+                if (isdigit(v[i]))
+                    fractionaryPart.push_back(v[i]);
+                else
+                    throw std::runtime_error("NaN");
+                i++;
+            }
+        }
+        reverse(integerPart.begin(), integerPart.end());
+        if (fractionaryPart.size())
+            reverse(fractionaryPart.begin(), fractionaryPart.end());
     }
     string toString() {
         string answer;
         if (sign)
             answer += "-";
-        answer += to_string(integerPart);
-        if (fractionaryPart)
-            answer += "." + to_string(fractionaryPart);
+        string x = string(integerPart.data(), integerPart.size());
+        reverse(x.begin(), x.end());
+        answer += x;
+        if (fractionaryPart.size()) {
+            answer += ".";
+            string x = string(fractionaryPart.data(), fractionaryPart.size());
+            reverse(x.begin(), x.end());
+            answer += x;
+        }
         return answer;
     }
 
   private:
-    int integerPart, fractionaryPart;
-    bool sign;
+    std::vector<char> integerPart, fractionaryPart;
+    bool sign = 0;
 };
 
 int main() {
-    BigNumber a = BigNumber(10, 3);
-    assert(a.toString() == "10.3");
-    BigNumber b = BigNumber(-10, 0);
-    assert(b.toString() == "-10");
+    std::vector<string> v = {"10", "10.3", "-10.555", "69.34433434", "0"};
+
+    for (int i = 0; i < v.size(); i++) {
+        BigNumber a = BigNumber(v[i]);
+        assert(a.toString() == v[i]);
+    }
+
     return 0;
 }
