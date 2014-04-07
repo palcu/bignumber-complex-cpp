@@ -22,12 +22,23 @@ Precizari:
         decat necesar).
 ```
 
-# Milestone 1
+I've used [TDD](http://en.wikipedia.org/wiki/Test-driven_development) for it.
 
 ![diagram](https://app.genmymodel.com/files/_ZJiAoJ-dEDGn1-aaBa6y3w/oop-diag.jpg)
 
-Just build the damn thing and use cppunit tests.
+# Milestone 0
+
+- [x] Working sum for rational positive numbers.
+
+# Milestone 1
+
+- [ ] sum for negative rational numbers
+- [ ] substract
+- [ ] other number classes
+- [ ] other operations
 
 # Milestone 2
 
-Transform the strings from base 10 to base 16.
+- [ ] remove the reverse stuff from the add function (use a `deque`)
+- [ ] store in the vectors a number, not a char digit
+- [ ] make it use base 16 or any other one
