@@ -104,8 +104,6 @@ class BigNumber {
     }
 
     void add(BigNumber x) {
-        reverse(x.fractionaryPart.begin(), x.fractionaryPart.end());
-
         bool carry = 0;
         std::tie(carry, fractionaryPart) = addTwoVectors(fractionaryPart,
                                                          x.fractionaryPart);
