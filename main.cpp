@@ -174,6 +174,12 @@ int main() {
     BigNumber ten = BigNumber("5.1");
     ten.add(BigNumber("3.2"));
     assert(ten.toString() == "8.3");
+    ten.add(BigNumber("1.12"));
+    assert(ten.toString() == "9.42");
+    ten.add(BigNumber("0.1"));
+    assert(ten.toString() == "9.52");
+    ten.add(BigNumber("0.000001"));
+    assert(ten.toString() == "9.520001");
 
     return 0;
 }
